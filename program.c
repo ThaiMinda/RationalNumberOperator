@@ -152,7 +152,7 @@ struct qNum qDiv(struct qNum a,struct qNum b){
 }
 
 struct qNum qScan(){
-	char str[20] ;
+	char str[30] ;
 	struct qNum res ;
 	scanf("%s",&str) ;
 	int frac = 0 ;
@@ -192,6 +192,9 @@ struct qNum qScan(){
 		sscanf(str,"-%d/%d",&res.nume,&res.deno) ;
 		res.sign = -1 ;
 	}
+	int red = gcd(res.deno,res.nume) ;
+	res.deno = res.deno / red ;
+	res.nume = res.nume / red ;
 	return res ;
 }
 
