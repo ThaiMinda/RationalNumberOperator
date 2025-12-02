@@ -17,6 +17,7 @@ struct qNum qMul(struct qNum a,struct qNum b) ;
 struct qNum qRec(struct qNum a) ;
 struct qNum qDiv(struct qNum a,struct qNum b) ;
 
+struct qNum qDefine(char str[]) ;
 struct qNum qScan() ; 
 void qPrint(struct qNum a) ;
 
@@ -149,6 +150,51 @@ struct qNum qRec(struct qNum a){
 
 struct qNum qDiv(struct qNum a,struct qNum b){
 	return qMul(a,qRec(b)) ;
+}
+
+struct qNum qDefine(char str[]){
+	struct qNum res ;
+	int frac = 0 ;
+	for ( int k = 0 ; k >= 0 ; k++ ){
+		if ( str[k] == '\0' ){
+			break ;
+		}
+		if ( str[k] == '/' ){
+			frac = 1 ;
+			break ;
+		}
+	}
+	int nega = 0 ;
+	if ( str[0] == '-' ){
+		nega = 1 ;
+	}
+	if ( !frac && !nega ){
+		sscanf(str,"%d",&res.nume) ;
+		res.deno = 1 ;
+		if ( res.nume == 0 ){
+			res.sign = 0 ;
+		}
+		else{
+			res.sign = 1 ;
+		}
+	}
+	if ( frac && !nega ){
+		sscanf(str,"%d/%d",&res.nume,&res.deno) ;
+		res.sign = 1 ;
+	}
+	if ( !frac && nega ){
+		sscanf(str,"-%d",&res.nume) ;
+		res.deno = 1 ;
+		res.sign = -1 ;
+	}
+	if ( frac && nega ){
+		sscanf(str,"-%d/%d",&res.nume,&res.deno) ;
+		res.sign = -1 ;
+	}
+	int red = gcd(res.deno,res.nume) ;
+	res.deno = res.deno / red ;
+	res.nume = res.nume / red ;
+	return res ;
 }
 
 struct qNum qScan(){
