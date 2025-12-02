@@ -6,7 +6,7 @@ This program defines 3 common functions: `min()`, `lcm()` and `gcd()`. You shoul
 
 ## Using Instructions
 
-### Declaring
+### Declaration
 
 Use `struct qNum` to declare a rational number. Arrays are also supported.
 
@@ -25,11 +25,18 @@ Use function `qScan()` to input the value of a rational number. You should enter
   a = qScan() ;
 ```
 
-Zero: Enter `0`.
+Integer: Enter the original appearance. `0` for zero, `3` for positive three, `-4` for negative four, etc.
 
-Integer: Enter its original appearance. `3` for positive three, `-4` for negative four, etc.
+Fraction: Enter the numerator and denominator, separated by `/`. If the number is negative, `-` should be at the forefront. `1/2` for positive half, `8/7` for positive eight seventh, and `-3/5` for negative three fifth, etc. In addition, input like `2/4` is also supported. The program will make a reduction automatically.
 
-Fraction: Enter its numerator and denominator, separated by `/`. If it is negative, `-` should be at the forefront. `1/2` for positive half, `8/7` for positive eight seventh, and `-3/5` for negative three fifth. Confirm that it is an irreducible fraction.
+### Constant Definition
+
+Use function `qDefine()` to define a constant rational number. The format is the same as the input.
+
+```C
+	struct qNum a ;
+	a = qDefine("2/5") ;
+```
 
 ### Output
 
@@ -129,6 +136,8 @@ Under normal circumstances, `nume` and `deno` should be positive integers, and `
 
 As a mark of polarity, `sign` should be 1, -1 or 0. Especially, if `sign` is 0, `nume` and `deno` should be 0 and 1.
 
-By using `qNum`, it is possible to accurately represent a large amount of fractions.
+Every rational number has its sole form. For example, zero is `(0,1,0)`, positive two is `(2,1,1)`, negative six is `(6,1,-1)`, positive two third is `(2,3,1)`, negative one eighth is `(1,8,-1)`, etc. (Format: `(nume,deno,sign)`)
 
-To avoid breaking the above rules, please entirely use the functions included in the program to change the values of `qNum`.
+By using `qNum`, it is possible to accurately represent a large amount of rational numbers.
+
+To avoid breaking the above rules, you should entirely use the functions included in the program to change the values of `qNum`. Do not change a member individually.
